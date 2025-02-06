@@ -1,7 +1,7 @@
 package com.microservice.identity.Entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,12 +10,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@Data
+
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Document
-public class UserEntity implements UserDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String Id;
+public class UserEntity extends AbstractAuditingEntity<String> implements UserDetails {
     @Column(name="firstName")
     private String firstName;
     @Column(name="lastName")
@@ -26,6 +29,8 @@ public class UserEntity implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @Column(name="enabled")
+    private Boolean Enabled;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

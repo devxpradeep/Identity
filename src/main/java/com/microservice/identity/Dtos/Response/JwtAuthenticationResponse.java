@@ -5,13 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
-public class UserResponse {
-    String userId;
-    String email;
-    String firstName;
-    String lastName;
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class JwtAuthenticationResponse {
+    private String token;
 }
